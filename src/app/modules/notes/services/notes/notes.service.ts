@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
 import {first, map, Observable} from "rxjs";
 import {environment} from "../../../../environments/environment";
 import {Note} from "../../../models/note.model";
@@ -26,5 +26,18 @@ export class NotesService {
         first(),
         map((response) => Note.transform(response.body))
       );
+  }
+
+  editNote(noteId: string, editedNote: any): Observable<Note> {
+    return this.http.put(`${environment.BASE_URL}/${noteId}`, editedNote, {observe: 'response'})
+      .pipe(
+        first(),
+        map((response) => Note.transform(response.body))
+      );
+  }
+
+  deleteNote(noteId: string): Observable<HttpResponse<any>> {
+    return this.http.delete(`${environment.BASE_URL}/${noteId}`, {observe: 'response'})
+      .pipe(first());
   }
 }

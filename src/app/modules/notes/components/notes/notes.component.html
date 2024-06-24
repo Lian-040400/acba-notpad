@@ -3,5 +3,6 @@
 </app-header>
 <app-note-form (addNewNote)="getNotes()"></app-note-form>
 <div *ngFor="let note of notes">
-  <li>{{note.name}}</li>
+  <app-note [note]="note" (triggerEditedNote)="findEditedNote($event)"
+            (triggerDeletedNoteId)="deleteNote($event)"></app-note>
 </div>

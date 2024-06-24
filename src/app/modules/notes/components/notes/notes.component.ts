@@ -22,4 +22,17 @@ export class NotesComponent implements OnInit {
       this.notes = response;
     });
   }
+
+  findEditedNote(editedNote: Note) {
+    const index = this.notes.findIndex((note: Note) => note.id === editedNote.id);
+    if (index !== -1) {
+      this.notes[index] = editedNote;
+    }
+  }
+  deleteNote(deletedNoteId: string): void{
+    const index = this.notes.findIndex(note => note.id === deletedNoteId);
+    if (index !== -1) {
+      this.notes.splice(index, 1);
+    }
+  }
 }

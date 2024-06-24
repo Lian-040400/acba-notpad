@@ -26,13 +26,19 @@ export class ServerInterceptor implements HttpInterceptor {
     const {url, method} = request;
     if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.GET) {
       return this.getNotes();
-    } else if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.POST) {
+    }
+    else if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.POST) {
       return this.addNot(request);
-    } else {
+    }
+    else if (this.isNoteUrl(url) && method === CrudHttpMethods.PUT) {
+      return this.editNote(request, url);
+    }
+    else if (this.isNoteUrl(url) && method === CrudHttpMethods.DELETE) {
+      return this.deleteNote(url);
+    }
+    else {
       return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.WRONG));
     }
-
-    return next.handle(request);
   }
 
   private getNotes(): Observable<HttpResponse<any[]>> {
@@ -52,8 +58,40 @@ export class ServerInterceptor implements HttpInterceptor {
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.POST));
   }
 
+  private editNote(request: any, url: string): Observable<HttpResponse<any>> {
+    const id = this.getIdFromUrl(url);
+    const index = this.findIndexById(this.notes, id);
+
+    if (index !== -1) {
+      this.notes[index] = {...request.body, id};
+      this.setNotesToLocalStorage(this.notes);
+      return of(new HttpResponse({status: 200, body: this.notes[index]})).pipe(delay(300));
+    }
+    return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.PUT))
+  }
+
+  private deleteNote(url: string) {
+    const id = this.getIdFromUrl(url);
+    const index = this.findIndexById(this.notes, id);
+
+    if (index !== -1) {
+      this.notes.splice(index, 1);
+      this.setNotesToLocalStorage(this.notes);
+      return of(new HttpResponse({status: 200, body: index})).pipe(delay(500));
+    }
+    return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.DELETE))
+  }
+
+  private isNoteUrl(url: string): boolean {
+    return url.includes(environment.BASE_URL) && !!this.getIdFromUrl(url);
+  }
+
   private setNotesToLocalStorage(notes: any[]): void {
     localStorage.setItem('notes', JSON.stringify(notes));
+  }
+
+  private findIndexById(notes: any[], id: string) {
+    return notes.findIndex((i: any) => i.id === id);
   }
 
   private generateCustomHttpErrorResponse(message: string) {
@@ -62,6 +100,11 @@ export class ServerInterceptor implements HttpInterceptor {
       statusText: 'Bad Request',
       error: {message}
     });
+  }
+
+  private getIdFromUrl(url: string): string {
+    const segments = url.split('/');
+    return segments[segments.length - 1]
   }
 
   private canThrowError(): boolean {
