@@ -1,13 +1,13 @@
-<div class="container">
+<div class="notes-container">
   <app-header>
     <app-search></app-search>
   </app-header>
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
-  <div *ngFor="let note of notes">
-    <app-note [note]="note" (triggerEditedNote)="editNote($event)"
+  <div class="note-list-container">
+    <app-note *ngFor="let note of notes" [note]="note" (triggerEditedNote)="editNote($event)"
               (triggerDeletedNoteId)="deleteNote($event)">
-
     </app-note>
   </div>
   <app-chart></app-chart>
 </div>
+

@@ -1,2 +1,14 @@
-<p>note-form works!</p>
-<button (click)="addNote()">Add note</button>
+<div class="form-container">
+  <p class="form-header">Create Note</p>
+  <div class="note-title-container">
+    <p class="input-title">Note Title</p>
+    <input type="text">
+  </div>
+  <div class="note-description-container">
+    <p class="input-title">Note</p>
+    <textarea></textarea>
+  </div>
+  <div class="add-button">
+    <button (click)="addNote()">Create</button>
+  </div>
+</div>

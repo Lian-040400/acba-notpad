@@ -1,0 +1,7 @@
+.notes-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr  1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
