@@ -13,7 +13,6 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 export class ChartComponent {
   dps = [{x: 1, y: 10}, {x: 2, y: 13}, {x: 3, y: 18}, {x: 4, y: 20}, {x: 5, y: 17},{x: 6, y: 10}, {x: 7, y: 13}, {x: 8, y: 18}, {x: 9, y: 20}, {x: 10, y: 17},{x: 12, y: 17}];
   chart: any;
-
   chartOptions = {
     title: {
       fontFamily: "Open Sans, sans-serif",
@@ -24,8 +23,6 @@ export class ChartComponent {
 
       type: "line",
       color: "#00a789",
-      showInLegend: true,
-      name: "",
       markerType: "square",
       dataPoints: [
         { x: new Date(2024, 0, 3, 1,10,5), y: 650 },
@@ -35,11 +32,8 @@ export class ChartComponent {
       ]
     }],
     axisX:{
-      fontFamily: "arial",
       intervalType: "minute",
-      valueFormatString: "D MMMM hh:mm tt",
-      fontSize: 12,
-
+      valueFormatString: "D/M/Y hh:mm tt",
     },
 
   }

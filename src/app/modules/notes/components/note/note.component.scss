@@ -4,6 +4,7 @@
   background: var(--color-grey-light-1);
   border-radius: 1rem;
   font-size: 1.2rem;
+
   .note-container {
     .note-header {
       display: flex;
@@ -43,20 +44,23 @@
 
   .edit {
     position: relative;
-    .i-cross{
+
+    .i-cross {
       position: absolute;
       right: 0;
       color: var(--color-black-opacity);
-        display: inline-block;
-        padding: .1rem;
-        font-size: 1.2rem;
+      display: inline-block;
+      padding: .1rem;
+      font-size: 1.2rem;
       font-weight: 400;
-      &:hover{
+
+      &:hover {
         cursor: pointer;
         color: var(--color-primary);
       }
 
     }
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -117,6 +121,7 @@
         }
       }
     }
+
     .save-button {
       button {
         padding: 1rem 7rem;
@@ -128,6 +133,75 @@
     }
   }
 }
-.hide{
+
+.hide {
   display: none;
+}
+
+.confirmation-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(210, 210, 210, 0.11);
+  z-index: 111111;
+
+  .content {
+    width: 40rem;
+    height: 30rem;
+    padding: 5rem;
+    background-color: var(--color-white);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 1rem;
+
+    i {
+      font-size: 1.4rem;
+      padding: 1rem;
+      position: absolute;
+      color:  var(--color-grey-dark);
+      top: 0;
+      right: 0;
+    }
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      //margin-bottom: 5rem;
+    }
+    span{
+      font-size: 1.8rem;
+    color:var(--color-black-opacity);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .buttons {
+    .btn {
+      font-size: 1.4rem;
+      padding: .8rem 4rem;
+      border-radius: .4rem;
+      border: none;
+      color: var(--color-white);
+    }
+    .cancel-btn{
+      margin-right: 1rem;
+      background-color: var(--color-grey-dark);
+    }
+    .delete-btn{
+      background-color: red;
+    }
+  }
 }

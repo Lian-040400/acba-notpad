@@ -5,6 +5,7 @@
   --color-white: #FFF;
   --color-grey-light-1: #F5F6F8;
   --color-grey-light-2: #eaeaea;
+  --color-grey-dark: #bbbbbb;
   --color-black: #000;
   --color-black-opacity: rgba(0, 0, 0, 0.65);
   --color-red: #ff0000
@@ -37,4 +38,5 @@ body {
   font-weight: 400;
   line-height: 1.6;
   min-height: 100vh;
+  position: relative;
 }
