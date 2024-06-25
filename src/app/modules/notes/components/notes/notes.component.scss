@@ -1,7 +1,11 @@
 .notes-container {
   display: grid;
-  grid-template-columns: 1fr 2fr  1fr;
+  grid-template-columns: 1.5fr 2fr  1.5fr;
   gap: 2rem;
   align-items: start;
+  .note-list-container{
+    height: 88vh;
+    overflow-y:scroll;
+  }
 }
 

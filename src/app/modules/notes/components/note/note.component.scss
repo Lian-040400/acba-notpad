@@ -1,0 +1,133 @@
+.container {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--color-grey-light-1);
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  .note-container {
+    .note-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        font-weight: 550;
+      }
+
+      .icons {
+        i {
+          display: inline-block;
+          padding: .5rem;
+          font-size: 1.4rem;
+        }
+
+        .i-bin {
+          &:hover {
+            cursor: pointer;
+            color: var(--color-red);
+          }
+        }
+
+        .i-pencil {
+          &:hover {
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+
+    .note {
+      color: var(--color-black-opacity);
+    }
+  }
+
+  .edit {
+    position: relative;
+    .i-cross{
+      position: absolute;
+      right: 0;
+      color: var(--color-black-opacity);
+        display: inline-block;
+        padding: .1rem;
+        font-size: 1.2rem;
+      font-weight: 400;
+      &:hover{
+        cursor: pointer;
+        color: var(--color-primary);
+      }
+
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    background: var(--color-grey-light-1);
+    border-radius: 1rem;
+    font-size: 1.2rem;
+
+    .note-description-container, .note-title-container {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      p {
+        padding-left: .5rem;
+        font-size: 1rem;
+        color: var(--color-black-opacity);
+      }
+    }
+
+    .note-description-container {
+      textarea {
+        width: 100%;
+        height: 7rem;
+        padding: .8rem;
+        border-radius: 1rem;
+        border: 1px solid var(--color-grey-light-2);
+        background: var(--color-white);
+        resize: none;
+
+        &:hover {
+          border: 1px solid var(--color-primary);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .note-title-container {
+      input {
+        width: 50%;
+        padding: 1rem 2rem;
+        border: 1px solid var(--color-grey-light-2);
+        border-radius: 1rem;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all .2s;
+
+        &:hover {
+          border: 1px solid var(--color-primary);
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    .save-button {
+      button {
+        padding: 1rem 7rem;
+        border: none;
+        border-radius: 1rem;
+        background-color: var(--color-primary);
+        color: var(--color-white);
+      }
+    }
+  }
+}
+.hide{
+  display: none;
+}

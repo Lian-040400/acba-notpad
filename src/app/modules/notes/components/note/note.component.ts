@@ -11,6 +11,7 @@ export class NoteComponent {
   @Input() note!: Note;
   @Output() triggerEditedNote: EventEmitter<any> = new EventEmitter();
   @Output() triggerDeletedNoteId: EventEmitter<any> = new EventEmitter();
+  hideEditModal = true;
 
   constructor(private noteService: NotesService) {
   }
@@ -25,7 +26,11 @@ export class NoteComponent {
 
   deleteNote(noteId: string): void {
     this.noteService.deleteNote(noteId).subscribe((response) => {
-     this.triggerDeletedNoteId.emit(noteId);
+      this.triggerDeletedNoteId.emit(noteId);
     });
+  }
+
+  toggleEditModal() {
+    this.hideEditModal = !this.hideEditModal;
   }
 }

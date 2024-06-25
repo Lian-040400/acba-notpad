@@ -1,3 +1,33 @@
-<li>{{note.name}}</li>
-<button (click)="editNote(note.id)">Edit note</button>
-<button (click)="deleteNote(note.id)">Delete note</button>
+<!--<li>{{note.name}}</li>-->
+<!--<button (click)="editNote(note.id)">Edit note</button>-->
+<!--<button (click)="deleteNote(note.id)">Delete note</button>-->
+<div class="container">
+<div class="note-container" [class.hide]="!hideEditModal">
+  <div class="note-header">
+    <p class="title">Note</p>
+    <div class="icons">
+      <i class="i-pencil" (click)="toggleEditModal()"></i>
+      <i class="i-bin"></i>
+    </div>
+  </div>
+  <div class="note">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur delectus dolor dolore dolores dolorum earum expedita facilis hic molestias nam nemo neque, nihil, numquam praesentium quibusdam quis, sequi tempora!</p>
+  </div>
+</div>
+<div class="edit-container" [class.hide]="hideEditModal">
+  <div class="edit">
+    <i class="i-cross" (click)="toggleEditModal()"></i>
+    <div class="note-title-container">
+      <p class="input-title">Note Title</p>
+      <input type="text">
+    </div>
+    <div class="note-description-container">
+      <p class="input-title">Note</p>
+      <textarea></textarea>
+    </div>
+    <div class="save-button">
+      <button>Save</button>
+    </div>
+</div>
+</div>
+</div>
