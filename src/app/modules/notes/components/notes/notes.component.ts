@@ -23,7 +23,7 @@ export class NotesComponent implements OnInit {
     });
   }
 
-  findEditedNote(editedNote: Note) {
+  editNote(editedNote: Note) {
     const index = this.notes.findIndex((note: Note) => note.id === editedNote.id);
     if (index !== -1) {
       this.notes[index] = editedNote;

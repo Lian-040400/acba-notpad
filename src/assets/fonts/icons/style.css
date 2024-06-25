@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'ierc';
+  src:
+    url('fonts/ierc.ttf?aez26e') format('truetype'),
+    url('fonts/ierc.woff?aez26e') format('woff'),
+    url('fonts/ierc.svg?aez26e#ierc') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="i-"], [class*=" i-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ierc' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-pencil:before {
+  content: "\e905";
+}
+.i-search:before {
+  content: "\e986";
+}
+.i-bin:before {
+  content: "\e9ac";
+}
+.i-cross:before {
+  content: "\ea0f";
+}

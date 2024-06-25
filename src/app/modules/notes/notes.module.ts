@@ -10,6 +10,7 @@ import { NoteFormComponent } from './components/note-form/note-form.component';
 import {NotesService} from "./services/notes/notes.service";
 import {ErrorHandlerInterceptorProvider} from "../../interceptors/error-handler/error-handler.interceptor";
 import {ServerProvider} from "../../interceptors/server/server.interceptor";
+import {ChartComponent} from "../../standalones/chart/chart.component";
 
 
 @NgModule({
@@ -18,11 +19,12 @@ import {ServerProvider} from "../../interceptors/server/server.interceptor";
     NoteComponent,
     NoteFormComponent
   ],
-  imports: [
-    CommonModule,
-    NotesRoutingModule,
-    HeaderModule,
-    SearchModule
-  ]
+    imports: [
+        CommonModule,
+        NotesRoutingModule,
+        HeaderModule,
+        SearchModule,
+        ChartComponent
+    ]
 })
 export class NotesModule { }
