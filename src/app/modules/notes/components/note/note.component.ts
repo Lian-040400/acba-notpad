@@ -27,10 +27,7 @@ export class NoteComponent {
   }
 
   deleteNote(): void {
-    this.openOfConfirmModal.emit();
-    // this.noteService.deleteNote(noteId).subscribe((response) => {
-    //   this.triggerDeletedNoteId.emit(noteId);
-    // });
+    this.openOfConfirmModal.emit(this.note.id);
   }
 
   toggleEditModal() {

@@ -1,16 +1,17 @@
 <div class="notes-container">
   <app-header>
-    <app-search></app-search>
+    <app-search (searchInputValue)="getSearchInputValue($event)"></app-search>
   </app-header>
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
-  <div class="note-list-container">
-    <app-note *ngFor="let note of notes" [note]="note" (triggerEditedNote)="editNote($event)"
-              (openOfConfirmModal)="openOfConfirmModal()"
-              (triggerDeletedNoteId)="deleteNote($event)">
+  <div class="note-list-container" [class.hide]="!visibleNotes.length">
+    <app-note *ngFor="let note of visibleNotes" [note]="note" (triggerEditedNote)="editNote($event)"
+              (openOfConfirmModal)="openOfConfirmModal($event)"
+              (triggerDeletedNoteId)="deleteNote()">
     </app-note>
   </div>
-  <app-chart></app-chart>
+  <app-chart [class.hide]="!visibleNotes.length"></app-chart>
 </div>
+<div>hear can be your notes</div>
 
 
 <div class="confirmation-modal" [class.hide]="hideConfirmationModal"
@@ -20,8 +21,8 @@
     <img src="assets/img/remove.jpg" alt="">
     <span>Are you sure? </span>
     <div class="buttons">
-      <button class="btn cancel-btn">Cancel</button>
-      <button class="btn delete-btn">Delete</button>
+      <button class="btn cancel-btn" (click)="closeConfirmationModal()">Cancel</button>
+      <button class="btn delete-btn" (click)="deleteNote()">Delete</button>
     </div>
   </div>
 </div>
