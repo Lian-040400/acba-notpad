@@ -17,7 +17,7 @@ export class NotesComponent implements OnInit {
   removingNoteId = '';
   visibleNotes: Note[] = [];
   searchInputValue = new BehaviorSubject('');
-
+  removeSearchValue= false;
 
   constructor(
     private noteService: NotesService,
@@ -37,6 +37,7 @@ export class NotesComponent implements OnInit {
         let inputValue = value.trim().toLowerCase();
         this.visibleNotes = this.notes.filter(note => (note.title.toLowerCase()).includes(inputValue) || (note.note.toLowerCase()).includes(inputValue))
         this.dynamicChartDataService.notes = this.visibleNotes;
+        this.removeSearchValue = false;
       });
   }
 
@@ -45,6 +46,7 @@ export class NotesComponent implements OnInit {
       this.notes = response.reverse();
       this.visibleNotes = this.notes;
       this.dynamicChartDataService.notes = this.notes;
+      this.removeSearchValue = true;
     });
   }
 

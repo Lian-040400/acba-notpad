@@ -1,17 +1,36 @@
-import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements  OnChanges {
   @ViewChild('searchInput', {static: true}) searchInput!: ElementRef;
-  @Output()searchInputValue: EventEmitter<any> = new EventEmitter();
-  inputValue = '';
+  @Input() removeSearchValue = false;
+  @Output() searchInputValue: EventEmitter<any> = new EventEmitter();
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.removeSearchValue) {
+      this.resetSearchInputValue();
+    }
+  }
+
   changeSearchInputValue(): void {
-    this.inputValue = this.searchInput.nativeElement.value;
-    this.searchInputValue.emit(this.inputValue);
-    // this.loadedSearchComponent.instance.searchInputValue.next(this.searchInput.nativeElement.value);
+    this.searchInputValue.emit(this.searchInput.nativeElement.value);
+    this.removeSearchValue = false;
+  }
+
+  resetSearchInputValue(): void {
+    this.searchInput.nativeElement.value = '';
+    this.changeSearchInputValue();
   }
 }

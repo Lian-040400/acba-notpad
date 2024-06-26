@@ -1,6 +1,6 @@
 <div class="notes-container">
   <app-header>
-    <app-search (searchInputValue)="getSearchInputValue($event)"></app-search>
+    <app-search (searchInputValue)="getSearchInputValue($event)" [removeSearchValue]="removeSearchValue"></app-search>
   </app-header>
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
   <div class="note-list-container" [class.hide]="!visibleNotes.length">

@@ -1,7 +1,8 @@
-:host{
+:host {
   display: flex;
   align-items: center;
 }
+
 .form-container {
   width: 100%;
   height: auto;
@@ -41,11 +42,17 @@
       font-family: inherit;
       font-size: 1rem;
       transition: all .2s;
+
       &:hover {
         border: 1px solid var(--color-primary);
       }
+
       &:focus {
         outline: none;
+      }
+
+      &.ng-invalid.ng-touched {
+        border-color: var(--color-red);
       }
     }
   }
@@ -56,7 +63,7 @@
       border: none;
       border-radius: 1rem;
       background-color: var(--color-primary);
-      color:  var(--color-white);
+      color: var(--color-white);
     }
   }
 
@@ -71,15 +78,29 @@
       resize: none;
       font-family: inherit;
       font-size: 1rem;
+
       &:hover {
         border: 1px solid var(--color-primary);
       }
+
       &:focus {
         outline: none;
+      }
+
+      &.ng-invalid.ng-touched {
+        border-color: var(--color-red);
       }
     }
   }
 }
 
+.error-message-container {
+  margin-left: .5rem;
 
+  .error-message {
+    color: var(--color-red);
+    font-size: 1rem;
+  }
+
+}
 

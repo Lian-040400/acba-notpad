@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
 import {Note} from "../../../../core/models/note.model";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -33,13 +33,26 @@ export class NoteFormComponent implements OnInit {
     });
   }
 
-  addNote() {
-    let date = new Date();
-    date.setSeconds(0)
-    let c = {...this.noteForm.value, date: date.toString()}
-    this.noteService.addNote(c).subscribe((response: Note) => {
-      this.addNewNote.emit();
-    });
+  get title() {
+    return this.noteForm.get('title');
+  }
+
+  get note() {
+    return this.noteForm.get('note');
+  }
+
+  addNote(): void {
+    if (this.noteForm.valid) {
+      let date = new Date();
+      date.setSeconds(0)
+      let newNote = {...this.noteForm.value, date: date.toString()}
+      this.noteService.addNote(newNote).subscribe((response: Note) => {
+        this.addNewNote.emit();
+        this.noteForm.reset();
+      });
+    } else {
+      this.noteForm.markAllAsTouched();
+    }
   }
 
   checkForErrorsIn(formControl: AbstractControl): string {

@@ -1,6 +1,5 @@
 <div class="search">
-  <input class="search__input" type="text" placeholder="Search"
-         #searchInput (input)="changeSearchInputValue()"/>
-  <i class="i-search" *ngIf="!inputValue"> </i>
-  <i class="i-cross" *ngIf="inputValue"></i>
+  <input class="search__input" type="text" placeholder="Search" #searchInput (input)="changeSearchInputValue()"/>
+  <i class="i-search" *ngIf="!searchInput.value"></i>
+  <i class="i-cross" *ngIf="searchInput.value" (click)="resetSearchInputValue()"></i>
 </div>
