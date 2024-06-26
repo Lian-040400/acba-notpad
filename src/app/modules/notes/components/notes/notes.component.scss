@@ -8,4 +8,74 @@
     overflow-y:scroll;
   }
 }
+.confirmation-modal {
+  height: 100vh;
+  width: 100%;
 
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(193 193 193 / 59%);
+  z-index: 111111;
+
+  .content {
+    width: 40rem;
+    height: 30rem;
+    padding: 5rem;
+    background-color: var(--color-white);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 1rem;
+
+    i {
+      font-size: 1.4rem;
+      padding: 1rem;
+      position: absolute;
+      color:  var(--color-grey-dark);
+      top: 0;
+      right: 0;
+    }
+
+    img {
+      width: 6rem;
+      height: 6rem;
+      //margin-bottom: 5rem;
+    }
+    span{
+      font-size: 1.8rem;
+      color:var(--color-black-opacity);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .buttons {
+    .btn {
+      font-size: 1.4rem;
+      padding: .8rem 4rem;
+      border-radius: .4rem;
+      border: none;
+      color: var(--color-white);
+    }
+    .cancel-btn{
+      margin-right: 1rem;
+      background-color: var(--color-grey-dark);
+    }
+    .delete-btn{
+      background-color: red;
+    }
+  }
+}
+.hide {
+  display: none;
+}

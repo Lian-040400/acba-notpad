@@ -2,14 +2,14 @@ import {BaseModel} from "./base.model";
 
 export class Note extends BaseModel {
   id: string
-  name: string;
-  description: string;
+  title: string;
+  note: string;
   date: string;
 
   constructor(data: any) {
     super(data);
-    this.name = data.name;
-    this.description = data.description;
+    this.note = data.note;
+    this.title = data.title;
     this.date = data.date;
     this.id = data.id;
   }

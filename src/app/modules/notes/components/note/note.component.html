@@ -4,14 +4,14 @@
 <div class="container">
 <div class="note-container" [class.hide]="!hideEditModal">
   <div class="note-header">
-    <p class="title">Note</p>
+    <p class="title">{{note.title}}</p>
     <div class="icons">
       <i class="i-pencil" (click)="toggleEditModal()"></i>
-      <i class="i-bin"></i>
+      <i class="i-bin" (click)="deleteNote()"></i>
     </div>
   </div>
   <div class="note">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto consequuntur delectus dolor dolore dolores dolorum earum expedita facilis hic molestias nam nemo neque, nihil, numquam praesentium quibusdam quis, sequi tempora!</p>
+    <p>{{note.note}}</p>
   </div>
 </div>
 <div class="edit-container" [class.hide]="hideEditModal">
@@ -19,27 +19,15 @@
     <i class="i-cross" (click)="toggleEditModal()"></i>
     <div class="note-title-container">
       <p class="input-title">Note Title</p>
-      <input type="text">
+      <input type="text" [value]="note.title">
     </div>
     <div class="note-description-container">
       <p class="input-title">Note</p>
-      <textarea></textarea>
+      <textarea [value]="note.note"></textarea>
     </div>
     <div class="save-button">
       <button>Save</button>
     </div>
 </div>
 </div>
-</div>
-
-<div class="confirmation-modal">
-  <div class="content">
-    <i class="i-cross"></i>
-    <img src="assets/img/remove.jpg" alt="">
-    <span>Are you sure? </span>
-    <div class="buttons">
-      <button class="btn cancel-btn">Cancel</button>
-      <button class="btn delete-btn">Delete</button>
-    </div>
-  </div>
 </div>

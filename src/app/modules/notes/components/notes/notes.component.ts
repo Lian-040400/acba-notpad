@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
-import {Note} from "../../../models/note.model";
+import {Note} from "../../../../core/models/note.model";
+import {DynamicChartDataService} from "../../../../core/services/dynamic-chart-data/dynamic-cart-data.service";
 
 @Component({
   selector: 'app-notes',
@@ -9,8 +10,11 @@ import {Note} from "../../../models/note.model";
 })
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
+  hideConfirmationModal = true;
 
-  constructor(private noteService: NotesService) {
+  constructor(
+    private noteService: NotesService,
+    private dynamicChartDataService: DynamicChartDataService) {
   }
 
   ngOnInit() {
@@ -20,6 +24,7 @@ export class NotesComponent implements OnInit {
   getNotes(): void {
     this.noteService.getNotes().subscribe((response) => {
       this.notes = response;
+      this.dynamicChartDataService.notes = this.notes;
     });
   }
 
@@ -29,10 +34,19 @@ export class NotesComponent implements OnInit {
       this.notes[index] = editedNote;
     }
   }
-  deleteNote(deletedNoteId: string): void{
+
+  deleteNote(deletedNoteId: string): void {
     const index = this.notes.findIndex(note => note.id === deletedNoteId);
     if (index !== -1) {
       this.notes.splice(index, 1);
     }
+  }
+
+  closeConfirmationModal(): void {
+    this.hideConfirmationModal = true;
+  }
+
+  openOfConfirmModal() {
+    this.hideConfirmationModal = false;
   }
 }

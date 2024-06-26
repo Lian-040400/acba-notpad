@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {first, map, Observable} from "rxjs";
-import {environment} from "../../../../environments/environment";
-import {Note} from "../../../models/note.model";
+import {environment} from "../../../../core/environments/environment";
+import {Note} from "../../../../core/models/note.model";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,6 @@ export class NotesService {
   getNotes(): Observable<Note[]> {
     return this.http.get<any>(environment.BASE_URL, {observe: 'response'})
       .pipe(
-        first(),
         map((response) => Note.transformCollection(response.body))
       );
   }

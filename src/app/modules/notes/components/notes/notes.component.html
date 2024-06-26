@@ -5,9 +5,24 @@
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
   <div class="note-list-container">
     <app-note *ngFor="let note of notes" [note]="note" (triggerEditedNote)="editNote($event)"
+              (openOfConfirmModal)="openOfConfirmModal()"
               (triggerDeletedNoteId)="deleteNote($event)">
     </app-note>
   </div>
   <app-chart></app-chart>
+</div>
+
+
+<div class="confirmation-modal" [class.hide]="hideConfirmationModal"
+     (click)="closeConfirmationModal()">
+  <div class="content">
+    <i class="i-cross" (click)="closeConfirmationModal()"></i>
+    <img src="assets/img/remove.jpg" alt="">
+    <span>Are you sure? </span>
+    <div class="buttons">
+      <button class="btn cancel-btn">Cancel</button>
+      <button class="btn delete-btn">Delete</button>
+    </div>
+  </div>
 </div>
 

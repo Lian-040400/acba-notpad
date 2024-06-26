@@ -1,54 +1,42 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import {Component, Input, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CanvasJS, CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import {Note} from "../../core/models/note.model";
+import {DynamicChartDataService} from "../../core/services/dynamic-chart-data/dynamic-cart-data.service";
+import {ChartDataI} from "../../core/interface/chart-data";
 
 @Component({
   selector: 'app-chart',
   standalone: true,
-
   imports: [CommonModule, CanvasJSAngularChartsModule],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent {
-  dps = [{x: 1, y: 10}, {x: 2, y: 13}, {x: 3, y: 18}, {x: 4, y: 20}, {x: 5, y: 17},{x: 6, y: 10}, {x: 7, y: 13}, {x: 8, y: 18}, {x: 9, y: 20}, {x: 10, y: 17},{x: 12, y: 17}];
-  chart: any;
-  chartOptions = {
-    title: {
-      fontFamily: "Open Sans, sans-serif",
-      text: "Notes Creation Chart",
-      fontSize: 12,
-    },
-    data: [{
+export class ChartComponent implements OnInit {
+  dataPoints: ChartDataI[] = [];
+  notes: Note[] = [];
 
-      type: "line",
-      color: "#00a789",
-      markerType: "square",
-      dataPoints: [
-        { x: new Date(2024, 0, 3, 1,10,5), y: 650 },
-        { x: new Date(2024, 0, 3,3,10,5), y: 700 },
-        { x: new Date(2024, 0, 3,6,10,5), y: 710 },
-        { x: new Date(2024, 0, 3,2,10,5), y: 658 },
-      ]
-    }],
-    axisX:{
-      intervalType: "minute",
-      valueFormatString: "D/M/Y hh:mm tt",
-    },
-
+  constructor(
+    private dynamicChartDataService: DynamicChartDataService) {
   }
-  getChartInstance(chart: object) {
-    this.chart = chart;
-    setTimeout(this.updateChart, 1000); //Chart updated every 1 second
-  }
-  updateChart = () => {
-    var yVal = this.dps[this.dps.length - 1].y +  Math.round(5 + Math.random() *(-5-5));
-    this.dps.push({x: this.dps[this.dps.length - 1].x + 1, y: yVal});
 
-    if (this.dps.length >  10 ) {
-      this.dps.shift();
-    }
-    this.chart.render();
-    setTimeout(this.updateChart, 1000); //Chart updated every 1 second
+  ngOnInit() {
+    this.dynamicChartDataService.chartData$.subscribe((val) => {
+      this.dataPoints = val;
+      let chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+          text: "Notes Creation Chart",
+          fontSize: 12,
+        },
+        data: [{
+          type: "stepLine",
+          color: "#00a789",
+          dataPoints: this.dataPoints
+        }]
+      });
+      chart.render();
+    });
   }
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Note} from "../../../models/note.model";
+import {Note} from "../../../../core/models/note.model";
 import {NotesService} from "../../services/notes/notes.service";
 
 @Component({
@@ -11,6 +11,8 @@ export class NoteComponent {
   @Input() note!: Note;
   @Output() triggerEditedNote: EventEmitter<any> = new EventEmitter();
   @Output() triggerDeletedNoteId: EventEmitter<any> = new EventEmitter();
+  @Output() openOfConfirmModal: EventEmitter<any> = new EventEmitter();
+
   hideEditModal = true;
 
   constructor(private noteService: NotesService) {
@@ -24,13 +26,14 @@ export class NoteComponent {
     });
   }
 
-  deleteNote(noteId: string): void {
-    this.noteService.deleteNote(noteId).subscribe((response) => {
-      this.triggerDeletedNoteId.emit(noteId);
-    });
+  deleteNote(): void {
+    this.openOfConfirmModal.emit();
+    // this.noteService.deleteNote(noteId).subscribe((response) => {
+    //   this.triggerDeletedNoteId.emit(noteId);
+    // });
   }
 
   toggleEditModal() {
-    this.hideEditModal = !this.hideEditModal;
+    this.hideEditModal = ! this.hideEditModal;
   }
 }

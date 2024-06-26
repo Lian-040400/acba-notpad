@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {NotesService} from "./modules/notes/services/notes/notes.service";
-import {ErrorHandlerInterceptorProvider} from "./interceptors/error-handler/error-handler.interceptor";
-import {ServerProvider} from "./interceptors/server/server.interceptor";
+import {ErrorHandlerInterceptorProvider} from "./core/interceptors/error-handler/error-handler.interceptor";
+import {ServerProvider} from "./core/interceptors/server/server.interceptor";
 
 @NgModule({
   declarations: [

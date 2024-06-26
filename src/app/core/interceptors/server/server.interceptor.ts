@@ -7,8 +7,8 @@ import {
 } from '@angular/common/http';
 import {delay, Observable, of, throwError} from 'rxjs';
 import {environment} from "../../environments/environment";
-import {CrudHttpMethods} from "../../modules/enums/crud-http-methods.enum";
-import {CrudErrorTexts} from "../../modules/enums/crud-error-texts.enum";
+import {CrudHttpMethods} from "../../../modules/notes/enums/crud-http-methods.enum";
+import {CrudErrorTexts} from "../../../modules/notes/enums/crud-error-texts.enum";
 import {v4 as uuid} from 'uuid';
 
 @Injectable()
