@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   selector: 'app-note-form',
   templateUrl: './note-form.component.html',
@@ -37,7 +38,9 @@ export class NoteFormComponent implements OnInit {
       let date = new Date();
       date.setSeconds(0)
       let newNote = {...this.noteForm.value, date: date.toString()}
-      this.noteService.addNote(newNote).subscribe(() => {
+      this.noteService.addNote(newNote)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
         this.addNewNote.emit();
         this.noteForm.reset();
       });

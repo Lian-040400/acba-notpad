@@ -4,7 +4,8 @@ import {CanvasJS, CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 import {Note} from "../../core/models/note.model";
 import {DynamicChartDataService} from "../../core/services/dynamic-chart-data/dynamic-cart-data.service";
 import {ChartDataI} from "../../core/interface/chart-data";
-
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   selector: 'app-chart',
   standalone: true,
@@ -23,7 +24,9 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.dynamicChartDataService.chartData$.subscribe((val) => {
+    this.dynamicChartDataService.chartData$
+    .pipe(untilDestroyed(this))
+    .subscribe((val) => {
       this.dataPoints = val;
       this.chart = new CanvasJS.Chart("chartContainer", {
         styles: "{width: '100%', height: '360px'}",
