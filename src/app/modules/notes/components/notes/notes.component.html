@@ -13,9 +13,7 @@
                 (openOfConfirmModal)="openOfConfirmModal($event)"
                 (triggerDeletedNoteId)="deleteNote()">
       </app-note>
-      <!--    <div class="no-notes-container">-->
       <p [class.hide]="pending || visibleNotes.length" class="no-notes">Hear can be your notes</p>
-      <!--    </div>-->
     </div>
     <div class="chart-wrapper">
         <app-loader [class.hide]="!pending"></app-loader>

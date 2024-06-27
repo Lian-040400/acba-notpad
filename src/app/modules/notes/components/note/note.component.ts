@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Note} from "../../../../core/models/note.model";
-import {NotesService} from "../../services/notes/notes.service";
 import {Validators, FormBuilder, FormGroup,} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
@@ -22,8 +21,7 @@ export class NoteComponent implements OnInit {
   noteEditForm!: FormGroup;
   hideEditModal = true;
 
-  constructor(
-    private noteService: NotesService, private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {

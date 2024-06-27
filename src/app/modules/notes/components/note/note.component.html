@@ -17,16 +17,16 @@
     <div class="note-title-container">
       <p class="input-title">Note Title</p>
       <input type="text" [value]="note.title" id="title" formControlName="title">
-      <div class="error-message-container" *ngIf="noteEditForm.get('title')?.invalid && (noteEditForm.get('title')?.dirty || noteEditForm.get('title')?.touched)">
-        <span class="error-message" *ngIf="noteEditForm.get('title')?.errors?.['required']">Title required.</span>
-        <span class="error-message" *ngIf="noteEditForm.get('title')?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
+      <div class="error-message-container" *ngIf="noteEditForm.controls['title']?.invalid && (noteEditForm.controls['title']?.dirty || noteEditForm.controls['title']?.touched)">
+        <span class="error-message" *ngIf="noteEditForm.controls['title']?.errors?.['required']">Title required.</span>
+        <span class="error-message" *ngIf="noteEditForm.controls['title']?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
       </div>
     </div>
     <div class="note-description-container">
       <p class="input-title">Note</p>
       <textarea [value]="note.note" id="note" formControlName="note"></textarea>
-      <div class="error-message-container" *ngIf="noteEditForm.get('note')?.invalid && (noteEditForm.get('note')?.dirty || noteEditForm.get('note')?.touched)">
-        <span class="error-message" *ngIf="noteEditForm.get('note')?.errors?.['required']">Note is required.</span>
+      <div class="error-message-container" *ngIf="noteEditForm.controls['note']?.invalid && (noteEditForm.controls['note']?.touched)">
+        <span class="error-message" *ngIf="noteEditForm.controls['note']?.errors?.['required']">Note is required.</span>
       </div>
     </div>
     <div class="save-button">
