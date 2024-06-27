@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
 import {Note} from "../../../../core/models/note.model";
 import {DynamicChartDataService} from "../../../../core/services/dynamic-chart-data/dynamic-cart-data.service";
-import {BehaviorSubject, debounceTime, pipe} from "rxjs";
+import {BehaviorSubject, debounceTime} from "rxjs";
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 @UntilDestroy()
