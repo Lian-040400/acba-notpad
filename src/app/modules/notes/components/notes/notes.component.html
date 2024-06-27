@@ -3,16 +3,23 @@
     <app-search (searchInputValue)="getSearchInputValue($event)" [removeSearchValue]="removeSearchValue"></app-search>
   </app-header>
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
-  <div class="note-list-container" [class.hide]="!visibleNotes.length">
-    <app-note *ngFor="let note of visibleNotes" [note]="note"
+  <div class="note-list-container">
+    <app-loader [class.hide]="!pending"></app-loader>
+    <app-note *ngFor="let note of visibleNotes"
+              [class.hide]="!visibleNotes.length || pending"
+              [note]="note"
               (triggerEditedNote)="editNote($event)"
               (openOfConfirmModal)="openOfConfirmModal($event)"
               (triggerDeletedNoteId)="deleteNote()">
     </app-note>
+<!--    <div class="no-notes-container">-->
+      <p [class.hide]="pending || visibleNotes.length" class="no-notes">Hear can be your notes</p>
+<!--    </div>-->
   </div>
-  <app-chart [class.hide]="!visibleNotes.length"></app-chart>
+  <!--  <app-loader></app-loader>-->
+    <app-chart [class.hide]="!visibleNotes.length"></app-chart>
+
 </div>
-<div>hear can be your notes</div>
 
 
 <div class="confirmation-modal" [class.hide]="hideConfirmationModal"

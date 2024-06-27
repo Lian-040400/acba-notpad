@@ -6,7 +6,7 @@ import {
   HttpInterceptor, HTTP_INTERCEPTORS, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import {delay, Observable, of, throwError} from 'rxjs';
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import {CrudHttpMethods} from "../../../modules/notes/enums/crud-http-methods.enum";
 import {CrudErrorTexts} from "../../../modules/notes/enums/crud-error-texts.enum";
 import {v4 as uuid} from 'uuid';
@@ -27,7 +27,7 @@ export class ServerInterceptor implements HttpInterceptor {
     if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.GET) {
       return this.getNotes();
     } else if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.POST) {
-      return this.addNot(request);
+      return this.addNote(request);
     } else if (this.isNoteUrl(url) && method === CrudHttpMethods.PUT) {
       return this.editNote(request, url);
     } else if (this.isNoteUrl(url) && method === CrudHttpMethods.DELETE) {
@@ -44,7 +44,7 @@ export class ServerInterceptor implements HttpInterceptor {
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.GET));
   }
 
-  private addNot(request: any): Observable<HttpResponse<any[]>> {
+  private addNote(request: any): Observable<HttpResponse<any[]>> {
     if (!this.canThrowError()) {
       const newNote = {...request.body, id: uuid()};
       this.notes.push(newNote);

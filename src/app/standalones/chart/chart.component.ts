@@ -24,11 +24,20 @@ export class ChartComponent implements OnInit {
     this.dynamicChartDataService.chartData$.subscribe((val) => {
       this.dataPoints = val;
       let chart = new CanvasJS.Chart("chartContainer", {
+        // width: 300,
+        responsive: true,
+        maintainAspectRatio: false,
         animationEnabled: true,
         theme: "light2",
         title: {
           text: "Notes Creation Chart",
           fontSize: 12,
+        },
+        axisX:{
+          labelFontSize: 10
+        },
+        axisY:{
+          labelFontSize: 10
         },
         data: [{
           type: "stepLine",

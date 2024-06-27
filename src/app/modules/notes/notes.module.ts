@@ -10,6 +10,7 @@ import { NoteFormComponent } from './components/note-form/note-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ChartComponent} from "../../standalones/chart/chart.component";
 import {DynamicChartDataService} from "../../core/services/dynamic-chart-data/dynamic-cart-data.service";
+import {LoaderComponent} from "../../standalones/loader/loader.component";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {DynamicChartDataService} from "../../core/services/dynamic-chart-data/dy
     HeaderModule,
     SearchModule,
     ReactiveFormsModule,
-    ChartComponent
+    ChartComponent,
+    LoaderComponent
   ],
   providers: [
     DynamicChartDataService

@@ -4,7 +4,7 @@
     <p class="input-title">Note Title</p>
     <input type="text" id="title" formControlName="title">
     <div class="error-message-container"
-         *ngIf="noteForm.get('title')?.invalid && (noteForm.get('title')?.dirty || noteForm.get('title')?.touched)">
+         *ngIf="noteForm.get('title')?.invalid && (noteForm.controls['title']?.dirty || noteForm.controls['title']?.touched)">
       <span class="error-message" *ngIf="noteForm.get('title')?.errors?.['required']">Title required.</span>
       <span class="error-message" *ngIf="noteForm.get('title')?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
     </div>
