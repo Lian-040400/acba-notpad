@@ -27,7 +27,7 @@ export class NotesService {
       );
   }
 
-  editNote(noteId: string, editedNote: any): Observable<Note> {
+  editNote(editedNote: any, noteId: string): Observable<Note> {
     return this.http.put(`${environment.BASE_URL}/${noteId}`, editedNote, {observe: 'response'})
       .pipe(
         first(),

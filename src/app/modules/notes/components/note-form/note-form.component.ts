@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
-import {Note} from "../../../../core/models/note.model";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-note-form',
@@ -33,20 +32,12 @@ export class NoteFormComponent implements OnInit {
     });
   }
 
-  get title() {
-    return this.noteForm.get('title');
-  }
-
-  get note() {
-    return this.noteForm.get('note');
-  }
-
   addNote(): void {
     if (this.noteForm.valid) {
       let date = new Date();
       date.setSeconds(0)
       let newNote = {...this.noteForm.value, date: date.toString()}
-      this.noteService.addNote(newNote).subscribe((response: Note) => {
+      this.noteService.addNote(newNote).subscribe(() => {
         this.addNewNote.emit();
         this.noteForm.reset();
       });
@@ -54,17 +45,4 @@ export class NoteFormComponent implements OnInit {
       this.noteForm.markAllAsTouched();
     }
   }
-
-  checkForErrorsIn(formControl: AbstractControl): string {
-    console.log(formControl)
-    if (formControl.hasError('required')) {
-      return 'Min value is required'
-    }
-
-    if (formControl.hasError('min') || formControl.hasError('max')) {
-      return 'Value must be between 0 and 255';
-    }
-    return ''
-  }
-
 }

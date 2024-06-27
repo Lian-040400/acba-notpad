@@ -26,17 +26,13 @@ export class ServerInterceptor implements HttpInterceptor {
     const {url, method} = request;
     if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.GET) {
       return this.getNotes();
-    }
-    else if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.POST) {
+    } else if (url.endsWith(environment.BASE_URL) && method === CrudHttpMethods.POST) {
       return this.addNot(request);
-    }
-    else if (this.isNoteUrl(url) && method === CrudHttpMethods.PUT) {
+    } else if (this.isNoteUrl(url) && method === CrudHttpMethods.PUT) {
       return this.editNote(request, url);
-    }
-    else if (this.isNoteUrl(url) && method === CrudHttpMethods.DELETE) {
+    } else if (this.isNoteUrl(url) && method === CrudHttpMethods.DELETE) {
       return this.deleteNote(url);
-    }
-    else {
+    } else {
       return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.WRONG));
     }
   }
@@ -63,7 +59,7 @@ export class ServerInterceptor implements HttpInterceptor {
     const index = this.findIndexById(this.notes, id);
 
     if (index !== -1) {
-      this.notes[index] = {...request.body, id};
+      this.notes[index] = {...request.body, date: this.notes[index].date, id};
       this.setNotesToLocalStorage(this.notes);
       return of(new HttpResponse({status: 200, body: this.notes[index]})).pipe(delay(300));
     }

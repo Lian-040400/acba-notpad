@@ -2,20 +2,22 @@
   <p class="form-header">Create Note</p>
   <div class="note-title-container">
     <p class="input-title">Note Title</p>
-    <input type="text" id="title" formControlName="title" name="title">
-    <div class="error-message-container" *ngIf="title?.invalid && (title?.dirty || title?.touched)">
-      <span class="error-message" *ngIf="title?.errors?.['required']">Title required.</span>
-      <span class="error-message" *ngIf="title?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
+    <input type="text" id="title" formControlName="title">
+    <div class="error-message-container"
+         *ngIf="noteForm.get('title')?.invalid && (noteForm.get('title')?.dirty || noteForm.get('title')?.touched)">
+      <span class="error-message" *ngIf="noteForm.get('title')?.errors?.['required']">Title required.</span>
+      <span class="error-message" *ngIf="noteForm.get('title')?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
     </div>
   </div>
   <div class="note-description-container">
     <p class="input-title">Note</p>
     <textarea id="note" formControlName="note"></textarea>
-    <div class="error-message-container" *ngIf="note?.invalid && (note?.dirty || note?.touched)">
-      <span class="error-message" *ngIf="note?.errors?.['required']">Note is required.</span>
+    <div class="error-message-container"
+         *ngIf="noteForm.get('note')?.invalid && (noteForm.get('note')?.dirty || noteForm.get('note')?.touched)">
+      <span class="error-message" *ngIf="noteForm.get('note')?.errors?.['required']">Note is required.</span>
     </div>
   </div>
   <div class="add-button">
-    <button type="submit" [disabled]="noteForm?.invalid">Create</button>
+    <button type="submit" [disabled]="noteForm.invalid">Create</button>
   </div>
 </form>

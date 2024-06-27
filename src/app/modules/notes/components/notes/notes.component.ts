@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NotesService} from "../../services/notes/notes.service";
 import {Note} from "../../../../core/models/note.model";
 import {DynamicChartDataService} from "../../../../core/services/dynamic-chart-data/dynamic-cart-data.service";
-import {BehaviorSubject, debounceTime} from "rxjs";
+import {BehaviorSubject, debounceTime, pipe} from "rxjs";
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -17,7 +17,7 @@ export class NotesComponent implements OnInit {
   removingNoteId = '';
   visibleNotes: Note[] = [];
   searchInputValue = new BehaviorSubject('');
-  removeSearchValue= false;
+  removeSearchValue = false;
 
   constructor(
     private noteService: NotesService,
@@ -42,25 +42,33 @@ export class NotesComponent implements OnInit {
   }
 
   getNotes(): void {
-    this.noteService.getNotes().subscribe((response) => {
-      this.notes = response.reverse();
-      this.visibleNotes = this.notes;
-      this.dynamicChartDataService.notes = this.notes;
-      this.removeSearchValue = true;
-    });
+    this.noteService.getNotes()
+      .pipe(untilDestroyed(this))
+      .subscribe((response) => {
+        this.notes = response.reverse();
+        this.visibleNotes = this.notes;
+        this.dynamicChartDataService.notes = this.notes;
+        this.removeSearchValue = true;
+      });
   }
 
-  editNote(editedNote: Note) {
-    // this.noteService.editNote(noteId, editedNote).subscribe((response=>{
-    //   const index = this.notes.findIndex((note: Note) => note.id === editedNote.id);
-    //   if (index !== -1) {
-    //     this.notes[index] = editedNote;
-    //   }
-    // })
+  editNote(editedNoteDetail: any) {
+    this.noteService.editNote(editedNoteDetail.value, editedNoteDetail.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(response => {
+        console.log(response, 'resp')
+        const index = this.notes.findIndex((note: Note) => note.id === editedNoteDetail.id);
+        if (index !== -1) {
+          this.notes[index] = response;
+          this.visibleNotes = this.notes;
+        }
+      });
   }
 
   deleteNote(): void {
-    this.noteService.deleteNote(this.removingNoteId).subscribe(() => {
+    this.noteService.deleteNote(this.removingNoteId)
+      .pipe(untilDestroyed(this))
+      .subscribe(() => {
       const index = this.notes.findIndex(note => note.id === this.removingNoteId);
       if (index !== -1) {
         this.notes.splice(index, 1);

@@ -1,6 +1,3 @@
-<!--<li>{{note.name}}</li>-->
-<!--<button (click)="editNote(note.id)">Edit note</button>-->
-<!--<button (click)="deleteNote(note.id)">Delete note</button>-->
 <div class="container">
 <div class="note-container" [class.hide]="!hideEditModal">
   <div class="note-header">
@@ -14,20 +11,27 @@
     <p>{{note.note}}</p>
   </div>
 </div>
-<div class="edit-container" [class.hide]="hideEditModal">
+<form class="edit-container" [class.hide]="hideEditModal" [formGroup]="noteEditForm" (ngSubmit)="editNote()">
   <div class="edit">
     <i class="i-cross" (click)="toggleEditModal()"></i>
     <div class="note-title-container">
       <p class="input-title">Note Title</p>
-      <input type="text" [value]="note.title">
+      <input type="text" [value]="note.title" id="title" formControlName="title">
+      <div class="error-message-container" *ngIf="noteEditForm.get('title')?.invalid && (noteEditForm.get('title')?.dirty || noteEditForm.get('title')?.touched)">
+        <span class="error-message" *ngIf="noteEditForm.get('title')?.errors?.['required']">Title required.</span>
+        <span class="error-message" *ngIf="noteEditForm.get('title')?.errors?.['maxlength']"> Note must be less than 255 characters long.</span>
+      </div>
     </div>
     <div class="note-description-container">
       <p class="input-title">Note</p>
-      <textarea [value]="note.note"></textarea>
+      <textarea [value]="note.note" id="note" formControlName="note"></textarea>
+      <div class="error-message-container" *ngIf="noteEditForm.get('note')?.invalid && (noteEditForm.get('note')?.dirty || noteEditForm.get('note')?.touched)">
+        <span class="error-message" *ngIf="noteEditForm.get('note')?.errors?.['required']">Note is required.</span>
+      </div>
     </div>
     <div class="save-button">
-      <button>Save</button>
+      <button [disabled]="noteEditForm.invalid">Save</button>
     </div>
 </div>
-</div>
+</form>
 </div>

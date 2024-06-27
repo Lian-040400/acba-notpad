@@ -4,7 +4,8 @@
   </app-header>
   <app-note-form (addNewNote)="getNotes()"></app-note-form>
   <div class="note-list-container" [class.hide]="!visibleNotes.length">
-    <app-note *ngFor="let note of visibleNotes" [note]="note" (triggerEditedNote)="editNote($event)"
+    <app-note *ngFor="let note of visibleNotes" [note]="note"
+              (triggerEditedNote)="editNote($event)"
               (openOfConfirmModal)="openOfConfirmModal($event)"
               (triggerDeletedNoteId)="deleteNote()">
     </app-note>

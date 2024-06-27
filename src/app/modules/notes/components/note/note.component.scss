@@ -105,6 +105,10 @@
         &:focus {
           outline: none;
         }
+
+        &.ng-invalid.ng-touched {
+          border-color: var(--color-red);
+        }
       }
     }
 
@@ -125,6 +129,10 @@
         &:focus {
           outline: none;
         }
+
+        &.ng-invalid.ng-touched {
+          border-color: var(--color-red);
+        }
       }
     }
 
@@ -142,4 +150,13 @@
 
 .hide {
   display: none;
+}
+.error-message-container {
+  margin-left: .5rem;
+
+  .error-message {
+    color: var(--color-red);
+    font-size: 1rem;
+  }
+
 }
