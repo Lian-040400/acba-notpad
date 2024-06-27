@@ -2,22 +2,26 @@
   <app-header>
     <app-search (searchInputValue)="getSearchInputValue($event)" [removeSearchValue]="removeSearchValue"></app-search>
   </app-header>
-  <app-note-form (addNewNote)="getNotes()"></app-note-form>
-  <div class="note-list-container">
-    <app-loader [class.hide]="!pending"></app-loader>
-    <app-note *ngFor="let note of visibleNotes"
-              [class.hide]="!visibleNotes.length || pending"
-              [note]="note"
-              (triggerEditedNote)="editNote($event)"
-              (openOfConfirmModal)="openOfConfirmModal($event)"
-              (triggerDeletedNoteId)="deleteNote()">
-    </app-note>
-<!--    <div class="no-notes-container">-->
+  <div class="main-section-wrapper">
+    <app-note-form (addNewNote)="getNotes()"></app-note-form>
+    <div class="note-list-container">
+      <app-loader [class.hide]="!pending"></app-loader>
+      <app-note *ngFor="let note of visibleNotes"
+                [class.hide]="!visibleNotes.length || pending"
+                [note]="note"
+                (triggerEditedNote)="editNote($event)"
+                (openOfConfirmModal)="openOfConfirmModal($event)"
+                (triggerDeletedNoteId)="deleteNote()">
+      </app-note>
+      <!--    <div class="no-notes-container">-->
       <p [class.hide]="pending || visibleNotes.length" class="no-notes">Hear can be your notes</p>
-<!--    </div>-->
+      <!--    </div>-->
+    </div>
+    <div class="chart-wrapper">
+        <app-loader [class.hide]="!pending"></app-loader>
+      <app-chart [class.hide]="!visibleNotes.length || pending" [pending]="pending"></app-chart>
+    </div>
   </div>
-  <!--  <app-loader></app-loader>-->
-    <app-chart [class.hide]="!visibleNotes.length"></app-chart>
 
 </div>
 

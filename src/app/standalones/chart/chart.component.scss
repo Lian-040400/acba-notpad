@@ -1,8 +1,19 @@
 :host{
-  margin-right: 2rem;
-  grid-area: chart;
+  display: block;
+  min-width: 0;
 }
 .chart-container{
   width: 100%;
 }
-
+#chartContainer{
+  background-color: red;
+  .canvasjs-chart-container{
+    background-color: red;
+  }
+  canvas{
+    right: 0 !important;
+  }
+}
+.canvasjs-chart-container{
+  background-color: red;
+}

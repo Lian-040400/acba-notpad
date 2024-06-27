@@ -1,0 +1,100 @@
+
+.loading-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+
+  .not-started-loading-container {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loader {
+      top: 50%;
+      color: var(--color-primary);
+      position: absolute;
+      font-size: 6px;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      text-indent: -9999em;
+      animation: mulShdSpin 1.5s infinite linear;
+      transform: translateZ(0);
+    }
+  }
+}
+
+@keyframes ball-size {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale3d(0.4, 0.4, 0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes ball-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+@keyframes mulShdSpin {
+  0%,
+  100% {
+    box-shadow: 0 -3em 0 0.2em,
+    2em -2em 0 0em, 3em 0 0 -1em,
+    2em 2em 0 -1em, 0 3em 0 -1em,
+    -2em 2em 0 -1em, -3em 0 0 -1em,
+    -2em -2em 0 0;
+  }
+  12.5% {
+    box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em,
+    3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em,
+    -2em 2em 0 -1em, -3em 0 0 -1em,
+    -2em -2em 0 -1em;
+  }
+  25% {
+    box-shadow: 0 -3em 0 -0.5em,
+    2em -2em 0 0, 3em 0 0 0.2em,
+    2em 2em 0 0, 0 3em 0 -1em,
+    -2em 2em 0 -1em, -3em 0 0 -1em,
+    -2em -2em 0 -1em;
+  }
+  37.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+    3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em,
+    -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  50% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+    3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em,
+    -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+  }
+  62.5% {
+    box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em,
+    3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0,
+    -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+  }
+  75% {
+    box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em,
+    3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em,
+    -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0 0, 2em -2em 0 -1em,
+    3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em,
+    -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+  }
+}
+

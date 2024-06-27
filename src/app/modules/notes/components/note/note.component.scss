@@ -4,18 +4,18 @@
   background: var(--color-grey-light-1);
   border-radius: 1rem;
   font-size: 1.2rem;
-
   .note-container {
     .note-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       p {
         font-weight: 550;
       }
-
       .icons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         i {
           display: inline-block;
           font-size: 1.4rem;
@@ -23,15 +23,12 @@
             cursor: pointer;
           }
         }
-
         .i-bin {
-          margin-left: .5rem;
           &:hover {
             cursor: pointer;
             color: var(--color-red);
           }
         }
-
         .i-pencil {
           &:hover {
             color: var(--color-primary);

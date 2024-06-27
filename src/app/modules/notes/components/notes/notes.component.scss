@@ -1,18 +1,55 @@
+:host{
+  width: 100%;
+  display: block;
+}
 .notes-container {
   width: 100%;
 }
-
+.note-list-container{
+  width: 100%;
+  min-width: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  @media screen and (max-width: 800px) {
+    max-height: 44vh;
+  }
+}
+.main-section-wrapper{
+  width: 100%;
+  min-height: 90vh;
+  max-width: 130rem;
+  gap: 1.6rem;
+  padding: 0 2rem;
+  margin: 0 auto;
+  display: grid;
+  align-items: self-start;
+  grid-template-columns: 30% 1fr 30%;
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+}
+.chart-wrapper{
+  position: relative;
+  min-width: 0;
+}
 .no-notes {
-  grid-area: list;
+  font-size: 1.2rem;
   text-align: center;
+  font-weight: bold;
+  color: var(--color-primary);
 }
 
 .confirmation-modal {
-  height: 100vh;
   width: 100%;
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
   align-items: center;
   justify-content: center;

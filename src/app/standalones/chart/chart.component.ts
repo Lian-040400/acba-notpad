@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CanvasJS, CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 import {Note} from "../../core/models/note.model";
@@ -12,9 +12,11 @@ import {ChartDataI} from "../../core/interface/chart-data";
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
+  @Input() pending!: boolean;
   dataPoints: ChartDataI[] = [];
   notes: Note[] = [];
+  chart!: any;
 
   constructor(
     private dynamicChartDataService: DynamicChartDataService) {
@@ -23,8 +25,8 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.dynamicChartDataService.chartData$.subscribe((val) => {
       this.dataPoints = val;
-      let chart = new CanvasJS.Chart("chartContainer", {
-        // width: 300,
+      this.chart = new CanvasJS.Chart("chartContainer", {
+        styles: "{width: '100%', height: '360px'}",
         responsive: true,
         maintainAspectRatio: false,
         animationEnabled: true,
@@ -45,7 +47,13 @@ export class ChartComponent implements OnInit {
           dataPoints: this.dataPoints
         }]
       });
-      chart.render();
+      this.chart.render();
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(!this.pending){
+      this.chart.render();
+    }
   }
 }

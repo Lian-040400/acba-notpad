@@ -11,12 +11,6 @@
   --color-red: #ff0000
 }
 
-$bp-largest: 75em; // 1200px
-$bp-large: 68.75em; // 1100px
-$bp-medium: 56.25em; // 900px
-$bp-small: 37.5em; // 600px
-$bp-smallest: 31.25em; // 500px
-
 * {
   margin: 0;
   padding: 0;
@@ -37,6 +31,9 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  min-height: 100vh;
+  //min-height: 100vh;
   position: relative;
+}
+html, body{
+  width: 100%;
 }

@@ -39,7 +39,7 @@ export class ServerInterceptor implements HttpInterceptor {
 
   private getNotes(): Observable<HttpResponse<any[]>> {
     if (!this.canThrowError()) {
-      return of(new HttpResponse({status: 200, body: this.notes})).pipe(delay(300));
+      return of(new HttpResponse({status: 200, body: this.notes})).pipe(delay(100));
     }
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.GET));
   }
@@ -49,7 +49,7 @@ export class ServerInterceptor implements HttpInterceptor {
       const newNote = {...request.body, id: uuid()};
       this.notes.push(newNote);
       this.setNotesToLocalStorage(this.notes);
-      return of(new HttpResponse({status: 200, body: newNote})).pipe(delay(300));
+      return of(new HttpResponse({status: 200, body: newNote})).pipe(delay(100));
     }
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.POST));
   }
@@ -61,7 +61,7 @@ export class ServerInterceptor implements HttpInterceptor {
     if (index !== -1) {
       this.notes[index] = {...request.body, date: this.notes[index].date, id};
       this.setNotesToLocalStorage(this.notes);
-      return of(new HttpResponse({status: 200, body: this.notes[index]})).pipe(delay(300));
+      return of(new HttpResponse({status: 200, body: this.notes[index]})).pipe(delay(100));
     }
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.PUT))
   }
@@ -73,7 +73,7 @@ export class ServerInterceptor implements HttpInterceptor {
     if (index !== -1) {
       this.notes.splice(index, 1);
       this.setNotesToLocalStorage(this.notes);
-      return of(new HttpResponse({status: 200, body: index})).pipe(delay(500));
+      return of(new HttpResponse({status: 200, body: index})).pipe(delay(100));
     }
     return throwError(() => this.generateCustomHttpErrorResponse(CrudErrorTexts.DELETE))
   }

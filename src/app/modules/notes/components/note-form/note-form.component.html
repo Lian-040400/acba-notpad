@@ -17,7 +17,5 @@
       <span class="error-message" *ngIf="noteForm.get('note')?.errors?.['required']">Note is required.</span>
     </div>
   </div>
-  <div class="add-button">
-    <button type="submit" [disabled]="noteForm.invalid">Create</button>
-  </div>
+  <button class="add-button" type="submit" [disabled]="noteForm.invalid">Create</button>
 </form>
